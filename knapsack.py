@@ -136,8 +136,7 @@ def experiment_td_vs_bu_td_better():
     plt.xlabel('Number of Items')
     plt.ylabel('Runtime (seconds)')
     plt.legend()
-    plt.title('Experiment 2: TD vs. BU (BU Better)')
-    # plt.title('Experiment 1: TD vs. BU (TD Better)')
+    plt.title('Experiment 1: TD vs. BU (BU Better)')
     plt.show()
 
 
@@ -165,10 +164,9 @@ def experiment_td_vs_bu_bu_better():
     plt.xlabel('Number of Items')
     plt.ylabel('Runtime (seconds)')
     plt.legend()
-    # plt.title('Experiment 2: TD vs. BU (BU Better)')
-    plt.title('Experiment 1: TD vs. BU (TD Better)')
+    plt.title('Experiment 2: TD vs. BU (TD Better)')
     plt.show()
 
 # experiment_rec_vs_brute_force()
 # experiment_td_vs_bu_td_better()
-# experiment_td_vs_bu_bu_better()
+experiment_td_vs_bu_bu_better()
