@@ -1,7 +1,7 @@
 from typing import List, Tuple
 import time
 import matplotlib.pyplot as plt
-
+import random
 
 # Implementation 1: Brute Force
 def ks_brute_force(items: List[Tuple[int]], capacity: int) -> int:
@@ -73,10 +73,6 @@ def ks_top_down(items: List[Tuple[int]], capacity: int) -> int:
         return memo[i][j]
 
     return knapsack_recursive(n, capacity)
-
-
-# Helper function to create a random item set
-import random
 
 
 def generate_random_items(num_items, min_weight, max_weight, min_value, max_value):
@@ -172,7 +168,6 @@ def experiment_td_vs_bu_bu_better():
     # plt.title('Experiment 2: TD vs. BU (BU Better)')
     plt.title('Experiment 1: TD vs. BU (TD Better)')
     plt.show()
-
 
 # experiment_rec_vs_brute_force()
 # experiment_td_vs_bu_td_better()

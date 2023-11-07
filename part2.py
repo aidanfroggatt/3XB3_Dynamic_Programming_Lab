@@ -1,4 +1,3 @@
-
 # PART 2
 def num_of_wc_runs(n, m):
     memo = {}
