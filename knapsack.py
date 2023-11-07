@@ -178,54 +178,32 @@ def experiment_td_vs_bu_bu_better():
 
 # PART 2
 def num_of_wc_runs(n, m):
-    def dp(i, j, memo):
-        if j == 0:  # No bricks left, invalid state
-            return float('inf')
-        if i == 1:  # Only one force setting left
-            return n - 1  # Linear search
-
-        if (i, j) in memo:
-            return memo[(i, j)]
-
-        # Two choices: Use a brick on the current setting or skip it
-        use_brick = 1 + dp(i - 1, j - 1, memo)
-        skip_setting = dp(i - 1, j, memo)
-
-        memo[(i, j)] = min(use_brick, skip_setting)
-        return memo[(i, j)]
-
     memo = {}
-    return dp(n, m, memo)
+
+    def dp(n, m):
+        if (n, m) in memo:
+            return memo[(n, m)]
+
+        if m == 0:
+            return 0
+        if n == 1:
+            return m - 1
+
+        min_runs = float('inf')
+        for k in range(1, n + 1):
+            runs = 1 + max(dp(k - 1, m - 1), dp(n - k, m))
+            min_runs = min(min_runs, runs)
+
+        memo[(n, m)] = min_runs
+        return min_runs
+
+    return dp(n, m)
 
 
 def next_setting(n, m):
-    def dp(i, j, memo):
-        if j == 0:  # No bricks left, invalid state
-            return float('inf')
-        if i == 1:  # Only one force setting left
-            return n  # Test the last setting
+    if m == 1:
+        return 1  # Linear search with one brick
 
-        if (i, j) in memo:
-            return memo[(i, j)]
+    # To minimize the worst-case runs, choose k that splits the remaining settings roughly in half.
+    return (n + 1) // 2
 
-        # Two choices: Use a brick on the current setting or skip it
-        use_brick = 1 + dp(i - 1, j - 1, memo)
-        skip_setting = dp(i - 1, j, memo)
-
-        if use_brick <= skip_setting:
-            memo[(i, j)] = n - i + 1  # Optimal to use a brick
-        else:
-            memo[(i, j)] = dp(i - 1, j, memo)  # Optimal to skip
-
-        return memo[(i, j)]
-
-    memo = {}
-    return dp(n, m, memo)
-
-
-def run_part2(force_settings, bricks):
-    print("worst-case number of runs: ", num_of_wc_runs(force_settings, bricks))  # Output: 33
-    print("next setting: ", next_setting(force_settings, bricks))  # Output: 50
-
-
-run_part2(25, 2)
